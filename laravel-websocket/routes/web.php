@@ -18,7 +18,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/playground' , function(){
-    event(new \App\Events\PlaygroundEvent());
+// Route::get('/chatmessage/' , function(){
+//     event(new \App\Events\ChatMessageEvent());
+//     return null;
+// });
+
+Route::get('/ws' , function(){
+    return view('websocket');
+});
+
+Route::post('/chat-message' , function(\Illuminate\Http\Request $request){
+
+    event(new \App\Events\ChatMessageEvent($request->message));
     return null;
+
 });
